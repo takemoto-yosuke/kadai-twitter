@@ -20,7 +20,22 @@
                             {!! Form::open(['route' => ['microposts.destroy', $micropost->id], 'method' => 'delete']) !!}
                                 {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
                             {!! Form::close() !!}
+                        @endif  
+                        
+                        
+                        @if (Auth::user()->is_favoriting($micropost->user_id))
+                            {{-- アンフォローボタンのフォーム --}}
+                            {!! Form::open(['route' => ['favorites.unfavorite', $micropost->user_id], 'method' => 'delete']) !!}
+                                {!! Form::submit('Unfavorite', ['class' => "btn btn-danger btn-block"]) !!}
+                            {!! Form::close() !!}
+                        @else
+                            {{-- フォローボタンのフォーム --}}
+                            {!! Form::open(['route' => ['favorites.favorite', $micropost->user_id]]) !!}
+                                {!! Form::submit('Favorite', ['class' => "btn btn-primary btn-block"]) !!}
+                            {!! Form::close() !!}
                         @endif
+                                              
+                        
                     </div>
                 </div>
             </li>
