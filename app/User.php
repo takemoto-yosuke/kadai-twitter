@@ -174,9 +174,10 @@ class User extends Authenticatable
 
         if ($exist) {
             // すでにフォローしていれば何もしない
+            //dd("$micropostId");
             return false;
         } else {
-            //dd("else");
+            //dd("$micropostId");
             // 未フォローであればフォローする
             $this->favorites()->attach($micropostId);
             return true;
@@ -206,6 +207,6 @@ class User extends Authenticatable
     public function is_favoriting($micropostId)
     {
         // フォロー中ユーザの中に $userIdのものが存在するか
-        return $this->favorites()->where('micropost_id', $micropostId)->exists();
+        return $this->favorites()->where('micropost_Id', $micropostId)->exists();
     }
 }
